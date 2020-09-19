@@ -228,7 +228,7 @@ body {
 /*-----container------设置博客显示内容宽*/
 
 .m-container {
-    max-width: 80em !important;
+    max-width: 70em !important;
     margin: auto !important;
 }
 .m-container-small {
