@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Error</title>
+</head>
+<body>
+    <h1>Error</h1>
+    <div>
+        <div th:utext="'&lt;!--'"  ></div>
+        <div th:utext="'Failed Request URL : ' + ${url}"  ></div>
+        <div th:utext="'Exception message : ' + ${exception}"  ></div>
+        <div th:utext="'--&gt;'"  ></div>
+    </div>
+</body>
+</html>
