@@ -51,6 +51,7 @@ drop table if exists t_user;
 create table t_user(
     id bigint(20) not null auto_increment,
     nickname varchar(255) default null,
+    username varchar(255) default null,
     password varchar(255) default null,
     email varchar(255) default null,
     avatar varchar(255) default null,
@@ -59,3 +60,10 @@ create table t_user(
     update_time datetime default null,
     primary key (id)
 )engine = INNODB charset = utf8;
+
+drop table if exists t_tag;
+create table t_tag(
+    id bigint(20) not null auto_increment,
+    name varchar(255) default null,
+    primary key (id)
+)engine = INNODB charset = utf8
