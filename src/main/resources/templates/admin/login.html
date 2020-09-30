@@ -7,6 +7,14 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
   <link rel="stylesheet" href="../../static/css/me.css">
 </head>
+
+<head >
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Log</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="../../static/css/me.css">
+</head>
 <body>
 
 <br>
@@ -39,7 +47,7 @@
            </div>
 
            <div class="ui error mini message"></div>
-           <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}">用户名和密码错误</div>
+           <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}">Incorrect username and password</div>
 
          </form>
        </div>
@@ -47,7 +55,7 @@
    </div>
  </div>
 
-<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+<!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <!--/*/</th:block>/*/-->
@@ -59,14 +67,14 @@
         identifier: 'username',
         rules: [{
           type : 'empty',
-          prompt: '请输入用户名'
+          prompt: 'Please enter username'
         }]
       },
       password : {
         identifier: 'password',
         rules: [{
           type : 'empty',
-          prompt: '请输入密码'
+          prompt: 'Please enter password'
         }]
       }
     }

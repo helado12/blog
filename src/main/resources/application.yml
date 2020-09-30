@@ -1,8 +1,10 @@
 spring:
   thymeleaf:
     mode: HTML
+
   profiles:
     active: dev
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:

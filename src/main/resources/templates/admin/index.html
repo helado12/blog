@@ -10,7 +10,7 @@
 <body>
 
   <!--导航-->
-  <nav th:replace="admin/_fragments :: menu(0)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
+  <nav th:replace="admin/_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
     <div class="ui container">
       <div class="ui inverted secondary stackable menu">
         <h2 class="ui teal header item">Admin</h2>
@@ -60,7 +60,8 @@
   <br>
   <br>
   <!--底部footer-->
-  <footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+<!--  <footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">-->
+  <footer class="ui inverted vertical segment m-padded-tb-massive">
     <div class="ui center aligned container">
       <div class="ui inverted divided stackable grid">
         <div class="three wide column">
@@ -99,6 +100,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
   <!--/*/</th:block>/*/-->
+
   <script>
     $('.menu.toggle').click(function () {
       $('.m-item').toggleClass('m-mobile-hide');
@@ -124,24 +126,24 @@
       })
     ;
 
-    function page(obj) {
-      $("[name='page']").val($(obj).data("page"));
-      loaddata();
-    }
-
-    $("#search-btn").click(function () {
-      $("[name='page']").val(0);
-      loaddata();
-    });
-    function loaddata() {
-      $("#table-container").load(/*[[@{/admin/blogs/search}]]*/"/admin/blogs/search",{
-        title : $("[name='title']").val(),
-        typeId : $("[name='typeId']").val(),
-        recommend : $("[name='recommend']").prop('checked'),
-        draft : $("[name='draft']").prop('checked'),
-        page : $("[name='page']").val()
-      });
-    }
+    // function page(obj) {
+    //   $("[name='page']").val($(obj).data("page"));
+    //   loaddata();
+    // }
+    //
+    // $("#search-btn").click(function () {
+    //   $("[name='page']").val(0);
+    //   loaddata();
+    // });
+    // function loaddata() {
+    //   $("#table-container").load(/*[[@{/admin/blogs/search}]]*/"/admin/blogs/search",{
+    //     title : $("[name='title']").val(),
+    //     typeId : $("[name='typeId']").val(),
+    //     recommend : $("[name='recommend']").prop('checked'),
+    //     draft : $("[name='draft']").prop('checked'),
+    //     page : $("[name='page']").val()
+    //   });
+    // }
 
   </script>
 </body>
