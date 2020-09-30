@@ -2,6 +2,7 @@ package com.htr.service;
 
 import com.htr.dao.UserDao;
 import com.htr.pojo.User;
+import com.htr.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User checkUser(String username, String password) {
-        User user = userDao.queryByUsernameAndPassword(username, password);
+        User user = userDao.queryByUsernameAndPassword(username, MD5Utils.code(password));
         return user;
     }
 }

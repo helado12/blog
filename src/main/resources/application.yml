@@ -5,7 +5,13 @@ spring:
   profiles:
     active: dev
 
+  resources:
+    static-locations: classpath:/static/images, classpath:/static/css, classpath:/static/js, classpath:/static/lib
+
+
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
+

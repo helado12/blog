@@ -1,4 +1,4 @@
-package com.htr.web;
+package com.htr.web.admin;
 
 import com.htr.pojo.User;
 import com.htr.service.UserService;
