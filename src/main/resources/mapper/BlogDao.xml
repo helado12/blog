@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.htr.dao.BlogDao">
+
+    <resultMap id="ResultBlog" type="Blog">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="firstPicture" column="firstPicture"/>
+        <result property="flag" column="flag"/>
+        <result property="views" column="views"/>
+        <result property="appreciation" column="appreciation"/>
+        <result property="shareStatement" column="shareStatement"/>
+        <result property="commentabled" column="commentabled"/>
+        <result property="published" column="published"/>
+        <result property="recommend" column="recommend"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="updateTime"/>
+        <result property="userId" column="user_id"/>
+        <result property="typeId" column="type_id"/>
+        <association property="user" javaType="User">
+            <id property="id" column="uid"/>
+            <result property="username" column="username"/>
+            <result property="nickname" column="nickname"/>
+            <result property="email" column="email"/>
+            <result property="avatar" column="avatar"/>
+        </association>
+        <association property="type" javaType="Type">
+            <id property="id" column="typeid"/>
+            <result property="name" column="typename"/>
+        </association>
+        <collection property="tags" ofType="Tag">
+            <id property="id" column="tagid"/>
+            <result property="name" column="tagname"/>
+        </collection>
+    </resultMap>
+
+    <select id="getBlog" resultMap="ResultBlog">
+        select b.id, b.first_picture, b.flag, b.title, b.content, b.views,
+               b.update_time,b.commentabled, b.shareStatement, b.appreciation, b.description,
+               u.nickname, u.avatar,
+               tag.id tagid, tag.name tagname
+        from t_blog b, t_user u, t_tag tag, t_blog_tags tb
+        where b.user_id = u.id and tb.blog_id = b.id and tb.tag_id = tag.id and  b.id = #{id}
+    </select>
+
+    <select id="listBlog" parameterType="Blog" resultMap="ResultBlog">
+        <bind name="pattern" value="'%' + #{title} + '%'"/>
+        select b.id,  b.title, b.update_time, b.recommend, b.published,
+               b.type_id, t.id typeid, t.name typename from t_blog b, t_type t
+        <where>
+            <if test="1 == 1">
+                b.type_id = t.id    /*博客类型id=类型id*/
+            </if>
+            <if test="id != null">
+                and b.id = #{id}
+            </if>
+            <if test="typeId != null">
+                and t.id = #{typeId}
+            </if>
+            <if test="recommend != null">
+                and b.recommend = #{recommend}
+            </if>
+            <if test="title != null">
+                and b.title like #{pattern}
+            </if>
+        </where>
+    </select>
+
+    <select id="listAllBlog" parameterType="Blog" resultMap="ResultBlog">
+        <bind name="pattern" value="'%' + #{title} + '%'"/>
+        select b.id,  b.title, b.update_time, b.recommend, b.published,
+        b.type_id, t.id typeid, t.name typename from t_blog b, t_type t
+        where   b.type_id = t.id    /*博客类型id=类型id*/
+    </select>
+
+    <insert id="saveBlog" parameterType="Blog">
+        insert into t_blog (id, title, content, first_picture, flag, views,
+                            appreciation, shareStatement, commentabled, published,
+                            recommend, create_time, update_time, user_id, type_id, tag_ids, description)
+                            values (#{id}, #{title}, #{content}, #{firstPicture}, #{flag},
+                            #{views}, #{appreciation}, #{shareStatement}, #{commentabled}, #{published},
+                            #{recommend}, #{createTime}, #{updateTime}, #{userId}, #{typeId}, #{tagIds}
+                            ,#{description})
+    </insert>
+
+    <update id="updateBlog" parameterType="Blog">
+        update t_blog set published = #{published},flag = #{flag} ,
+                          title = #{title}, content = #{content}, type_id = #{typeId}, tag_ids = #{tagIds},
+                          first_picture = #{firstPicture} , recommend = #{recommend} ,
+                          shareStatement = #{shareStatement}, appreciation = #{appreciation},
+                          commentabled = #{commentabled} ,update_time = #{updateTime}, description = #{description}
+                          where id = #{id};
+    </update>
+
+    <delete id="deleteBlog">
+        delete from t_blog where id = #{id}
+    </delete>
+    
+    
+</mapper>

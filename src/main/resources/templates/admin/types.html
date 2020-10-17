@@ -62,7 +62,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr th:each="type, iterStat: ${page}">
+          <tr th:each="type, iterStat: ${types}">
             <td th:text="${iterStat.count}">1</td>
             <td th:text="${type.name}">刻意练习清单</td>
             <td>

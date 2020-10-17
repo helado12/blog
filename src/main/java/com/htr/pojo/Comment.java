@@ -1,6 +1,7 @@
 package com.htr.pojo;
 
 import lombok.Data;
+import org.apache.ibatis.type.Alias;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 
 @Data
+@Alias("Comment")
 public class Comment {
 
     private Long id;

@@ -15,6 +15,8 @@ public interface TagService {
 
     List<Tag> listTag();
 
+    List<Tag> listTag(String ids);
+
     Tag getTagByName(String name);
 
     int updateTag(Tag tag);

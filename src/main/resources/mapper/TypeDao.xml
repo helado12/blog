@@ -22,4 +22,8 @@
     <update id="updateType" parameterType="com.htr.pojo.Type">
         update t_type set name = #{name} where id = #{id}
     </update>
+
+    <delete id="deleteType">
+        delete from t_type where id=#{id}
+    </delete>
 </mapper>

@@ -1,6 +1,7 @@
 package com.htr.pojo;
 
 import lombok.Data;
+import org.apache.ibatis.type.Alias;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
  */
 
 @Data
+@Alias("Blog")
 public class Blog {
     private Long id;
     private String title;
@@ -27,8 +29,15 @@ public class Blog {
     private boolean published;
     private boolean recommend;
 
-    private Date creatTime;
+    private Date createTime;
     private Date updateTime;
+
+    private String tagIds;
+    private String description;
+
+    private long userId;
+    private long typeId;
+
 //    多对一
     private User user;
 //    多对一

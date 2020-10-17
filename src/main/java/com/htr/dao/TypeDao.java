@@ -25,4 +25,6 @@ public interface TypeDao {
     int updateType(Type type);
 
     Type getTypeByName(String name);
+
+    void deleteType(long id);
 }

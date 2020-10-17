@@ -25,7 +25,7 @@ public class TypeController {
 
     @GetMapping("/types")
     public String types(Model model){
-        model.addAttribute("page", typeService.listType());
+        model.addAttribute("types", typeService.listType());
         return "admin/types";
     }
 
