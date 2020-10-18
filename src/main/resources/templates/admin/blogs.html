@@ -209,10 +209,10 @@
       loaddata();
     }
 
-    $("#search-btn").click(function () {
+    let typeId1 = $("[name='typeId']").val();
 
-      var typeId1 = $("[name='typeId']").val()
-      if (typeId1 = null){
+    $("#search-btn").click(function () {
+      if (typeId1 == null || typeId1 == ""){
         loaddata1();
       }else {
         loaddata();
@@ -222,9 +222,9 @@
     function loaddata() {
       $("#table-container").load(/*[[@{/admin/blogs/search}]]*/"/admin/blogs/search",{
         title : $("[name='title']").val(),
-        typeId : typeId,
+        typeId : typeId1,
         recommend : $("[name='recommend']").prop('checked'),
-        draft : $("[name='draft']").prop('checked'),
+        published : $("[name='draft']").prop('checked'),
         page : $("[name='page']").val()
       });
     }
@@ -233,7 +233,7 @@
       $("#table-container").load(/*[[@{/admin/blogs/search}]]*/"/admin/blogs/search",{
         title : $("[name='title']").val(),
         recommend : $("[name='recommend']").prop('checked'),
-        draft : $("[name='draft']").prop('checked'),
+        published : $("[name='draft']").prop('checked'),
         page : $("[name='page']").val()
       });
     }

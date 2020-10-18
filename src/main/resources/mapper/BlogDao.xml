@@ -47,7 +47,7 @@
     </select>
 
     <select id="listBlog" parameterType="Blog" resultMap="ResultBlog">
-        <bind name="pattern" value="'%' + #{title} + '%'"/>
+        <bind name="pattern" value="'%' + title + '%'"/>
         select b.id,  b.title, b.update_time, b.recommend, b.published,
                b.type_id, t.id typeid, t.name typename from t_blog b, t_type t
         <where>
@@ -57,13 +57,16 @@
             <if test="id != null">
                 and b.id = #{id}
             </if>
-            <if test="typeId != null">
+            <if test="typeId != 0">
                 and t.id = #{typeId}
             </if>
-            <if test="recommend != null">
+            <if test="recommend != false">
                 and b.recommend = #{recommend}
             </if>
-            <if test="title != null">
+            <if test="published != false">
+                and b.published != #{published}
+            </if>
+            <if test="title != ''">
                 and b.title like #{pattern}
             </if>
         </where>
@@ -84,6 +87,10 @@
                             #{views}, #{appreciation}, #{shareStatement}, #{commentabled}, #{published},
                             #{recommend}, #{createTime}, #{updateTime}, #{userId}, #{typeId}, #{tagIds}
                             ,#{description})
+    </insert>
+
+    <insert id="saveBlogTag" parameterType="BlogAndTag">
+        insert into t_blog_tags value(#{tagId}, #{blogId});
     </insert>
 
     <update id="updateBlog" parameterType="Blog">

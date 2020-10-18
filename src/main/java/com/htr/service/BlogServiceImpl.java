@@ -32,9 +32,14 @@ public class BlogServiceImpl implements BlogService{
     @Transactional
     @Override
     public int saveBlog(Blog blog) {
-        blog.setCreateTime(new Date());
-        blog.setUpdateTime(new Date());
-        blog.setViews(0);
+        if (blog.getId() == null){
+            blog.setCreateTime(new Date());
+            blog.setUpdateTime(new Date());
+            blog.setViews(0);
+            return blogDao.saveBlog(blog);
+        }else {
+            blog.setUpdateTime(new Date());
+        }
         return blogDao.saveBlog(blog);
     }
 
