@@ -1,6 +1,7 @@
 package com.htr.dao;
 
 import com.htr.pojo.Blog;
+import com.htr.pojo.BlogAndTag;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface BlogDao {
     List<Blog> listBlog(Blog blog);
 
     List<Blog> listAllBlog();
+
+    int saveBlogTag(BlogAndTag blogAndTag);
 }

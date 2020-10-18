@@ -55,8 +55,8 @@ public class BlogController {
     }
 
     public void setTypeAndTag(Model model){
-        model.addAttribute("types", typeService);
-        model.addAttribute("tags", tagService);
+        model.addAttribute("types", typeService.listType());
+        model.addAttribute("tags", tagService.listTag());
     }
 
     @GetMapping("/blogs/{id}/input")

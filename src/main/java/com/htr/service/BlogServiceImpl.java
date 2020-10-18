@@ -2,6 +2,8 @@ package com.htr.service;
 
 import com.htr.dao.BlogDao;
 import com.htr.pojo.Blog;
+import com.htr.pojo.BlogAndTag;
+import com.htr.pojo.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,8 @@ public class BlogServiceImpl implements BlogService{
 
     @Autowired
     private BlogDao blogDao;
+    @Autowired
+    private TagService tagService;
 
     @Override
     public Blog getBlog(long id) {
@@ -40,6 +44,9 @@ public class BlogServiceImpl implements BlogService{
         }else {
             blog.setUpdateTime(new Date());
         }
+        for(Tag tag: tagService.listTag(blog.getTagIds())){
+            blogDao.saveBlogTag(new BlogAndTag(blog.getId(),tag.getId()));
+        }
         return blogDao.saveBlog(blog);
     }
 
@@ -59,5 +66,6 @@ public class BlogServiceImpl implements BlogService{
     public List<Blog> listAllBlog() {
        return blogDao.listAllBlog();
     }
+
 }
 

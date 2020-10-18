@@ -1,6 +1,7 @@
 package com.htr.service;
 
 import com.htr.pojo.Blog;
+import com.htr.pojo.BlogAndTag;
 
 import java.util.List;
 
@@ -21,4 +22,5 @@ public interface BlogService {
 
 
     List<Blog> listAllBlog();
+
 }

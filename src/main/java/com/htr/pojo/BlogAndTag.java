@@ -12,4 +12,9 @@ public class BlogAndTag {
 
     private long tagId;
     private long blogId;
+
+    public BlogAndTag(long tagId, long blogId) {
+        this.tagId = tagId;
+        this.blogId = blogId;
+    }
 }

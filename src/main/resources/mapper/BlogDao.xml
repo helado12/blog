@@ -38,7 +38,7 @@
     </resultMap>
 
     <select id="getBlog" resultMap="ResultBlog">
-        select b.id, b.first_picture, b.flag, b.title, b.content, b.views,
+        select b.id, b.first_picture, b.flag, b.title, b.content, b.views, b.published,
                b.update_time,b.commentabled, b.shareStatement, b.appreciation, b.description,
                u.nickname, u.avatar,
                tag.id tagid, tag.name tagname
