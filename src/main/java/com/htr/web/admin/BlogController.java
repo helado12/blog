@@ -75,7 +75,11 @@ public class BlogController {
         blog.setType(typeService.getType(blog.getType().getId()));
         blog.setTypeId(blog.getType().getId());
         blog.setTags(tagService.listTag(blog.getTagIds()));
-        blogService.saveBlog(blog);
+        if (blog.getId() == null) {   //id为空，则为新增
+            blogService.saveBlog(blog);
+        } else {
+            blogService.updateBlog(blog);
+        }
         attributes.addFlashAttribute("message", "Congrats! Add successfully");
         return "redirect:/admin/blogs";
     }

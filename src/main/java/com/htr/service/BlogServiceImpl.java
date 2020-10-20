@@ -53,6 +53,7 @@ public class BlogServiceImpl implements BlogService{
     @Transactional
     @Override
     public int updateBlog(Blog blog) {
+        blog.setUpdateTime(new Date());
         return blogDao.updateBlog(blog);
     }
 

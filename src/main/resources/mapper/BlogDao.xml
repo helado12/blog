@@ -17,7 +17,7 @@
         <result property="published" column="published"/>
         <result property="recommend" column="recommend"/>
         <result property="createTime" column="create_time"/>
-        <result property="updateTime" column="updateTime"/>
+        <result property="updateTime" column="update_time"/>
         <result property="userId" column="user_id"/>
         <result property="typeId" column="type_id"/>
         <association property="user" javaType="User">
@@ -41,9 +41,9 @@
         select b.id, b.first_picture, b.flag, b.title, b.content, b.views, b.published,
                b.update_time,b.commentabled, b.shareStatement, b.appreciation, b.description,
                u.nickname, u.avatar,
-               tag.id tagid, tag.name tagname
-        from t_blog b, t_user u, t_tag tag, t_blog_tags tb
-        where b.user_id = u.id and tb.blog_id = b.id and tb.tag_id = tag.id and  b.id = #{id}
+               tag.id tagid, tag.name tagname, b.type_id typeid
+        from t_blog b, t_user u, t_tag tag, t_blog_tags tb, t_type type
+        where b.user_id = u.id and tb.blog_id = b.id and tb.tag_id = tag.id and b.id = #{id}
     </select>
 
     <select id="listBlog" parameterType="Blog" resultMap="ResultBlog">
