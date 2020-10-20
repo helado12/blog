@@ -34,11 +34,12 @@ public class BlogController {
     private TagService tagService;
 
     @GetMapping("/blogs")
-    public String blogs(Model model){
+    public String blogs(Model model, HttpSession session){
         model.addAttribute("blogs", blogService.listAllBlog());
         model.addAttribute("types", typeService.listType());
         return "/admin/blogs";
     }
+
 
     @PostMapping("/blogs/search")
     public String search(Blog blog, Model model){
