@@ -20,6 +20,7 @@
         <result property="updateTime" column="update_time"/>
         <result property="userId" column="user_id"/>
         <result property="typeId" column="type_id"/>
+        <result property="description" column="description"/>
         <association property="user" javaType="User">
             <id property="id" column="uid"/>
             <result property="username" column="username"/>
@@ -105,6 +106,19 @@
     <delete id="deleteBlog">
         delete from t_blog where id = #{id}
     </delete>
+
+    <select id="getIndexBlog" resultMap="ResultBlog">  /*主页博客展示*/
+    select b.id, b.title, b.first_picture, b.views, b.update_time, b.description,
+           t.name typename, t.id typeid,
+           u.nickname, u.avatar
+    from t_blog b, t_type t, t_user u
+    where b.type_id = t.id and  u.id = b.user_id order by b.update_time desc
+    </select>
+
+    <select id="getAllRecommendBlog" resultMap="ResultBlog">
+        select id, title, recommend from t_blog where recommend = true
+        order by update_time desc;
+    </select>
     
     
 </mapper>

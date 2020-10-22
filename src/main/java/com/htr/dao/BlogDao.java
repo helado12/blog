@@ -28,4 +28,8 @@ public interface BlogDao {
     List<Blog> listAllBlog();
 
     int saveBlogTag(BlogAndTag blogAndTag);
+
+    List<Blog> getIndexBlog();
+
+    List<Blog> getAllRecommendBlog();
 }

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -52,5 +54,19 @@ public class TypeServiceImpl implements TypeService{
     @Override
     public void deleteType(Long id) {
         typeDao.deleteType(id);
+    }
+
+    @Override
+    public List<Type> getBlogType() {
+        List<Type> types = typeDao.getBlogType();
+        Collections.sort(types, new Comparator<Type>() {
+            @Override
+            public int compare(Type o1, Type o2) {
+                Integer s1 = o1.getBlogs().size();
+                Integer s2 = o2.getBlogs().size();
+                return s1.compareTo(s2);
+            }
+        });
+        return types;
     }
 }

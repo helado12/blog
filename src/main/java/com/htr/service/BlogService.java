@@ -23,4 +23,7 @@ public interface BlogService {
 
     List<Blog> listAllBlog();
 
+    List<Blog> getIndexBlog();
+
+    List<Blog> getAllRecommendBlog();
 }

@@ -68,5 +68,15 @@ public class BlogServiceImpl implements BlogService{
        return blogDao.listAllBlog();
     }
 
+    @Override
+    public List<Blog> getIndexBlog() {
+        return blogDao.getIndexBlog();
+    }
+
+    @Override
+    public List<Blog> getAllRecommendBlog() {
+        return blogDao.getAllRecommendBlog();
+    }
+
 }
 

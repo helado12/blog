@@ -27,4 +27,6 @@ public interface TagDao {
     Tag getTagByName(String name);
 
     void deleteTag(Long id);
+
+    List<Tag> getBlogTag();
 }

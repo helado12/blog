@@ -19,6 +19,22 @@
         select * from t_tag where name = #{name}
     </select>
 
+    <resultMap id="tags" type="Tag">
+        <id property="id" column="tid"/>
+        <result property="name" column="name"/>
+        <collection property="blogs" ofType="Blog">
+            <id property="id" column="bid"/>
+            <result property="title" column="title"/>
+        </collection>
+    </resultMap>
+
+    <select id="getBlogTag" resultMap="tags">
+        select t.id tid, t.name, b.id bid, b.title
+        from t_tag t, t_blog b, t_blog_tags bt
+        where t.id = bt.tag_id and b.id = bt.blog_id
+    </select>
+
+
     <update id="updateTag" parameterType="com.htr.pojo.Tag">
         update t_tag set name = #{name} where id = #{id}
     </update>

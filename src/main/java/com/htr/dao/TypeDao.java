@@ -27,4 +27,6 @@ public interface TypeDao {
     Type getTypeByName(String name);
 
     void deleteType(long id);
+
+    List<Type> getBlogType();
 }

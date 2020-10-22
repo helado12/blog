@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -69,5 +71,19 @@ public class TagServiceImpl implements TagService{
     @Override
     public void deleteTag(Long id) {
         tagDao.deleteTag(id);
+    }
+
+    @Override
+    public List<Tag> getBlogTag() {
+        List<Tag> tags = tagDao.getBlogTag();
+        Collections.sort(tags, new Comparator<Tag>() {
+            @Override
+            public int compare(Tag o1, Tag o2) {
+                Integer s1 = o1.getBlogs().size();
+                Integer s2 = o2.getBlogs().size();
+                return s1.compareTo(s2);
+            }
+        });
+        return tags;
     }
 }
