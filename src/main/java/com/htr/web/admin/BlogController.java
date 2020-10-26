@@ -84,4 +84,10 @@ public class BlogController {
         attributes.addFlashAttribute("message", "Congrats! Add successfully");
         return "redirect:/admin/blogs";
     }
+
+    @RequestMapping("/blogs/{id}/delete")
+    public String deleteBlog(@PathVariable long id){
+        blogService.deleteBlog(id);
+        return "redirect:/admin/blogs";
+    }
 }

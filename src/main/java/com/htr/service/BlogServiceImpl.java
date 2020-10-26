@@ -1,9 +1,12 @@
 package com.htr.service;
 
+import com.htr.NotFoundException;
 import com.htr.dao.BlogDao;
 import com.htr.pojo.Blog;
 import com.htr.pojo.BlogAndTag;
 import com.htr.pojo.Tag;
+import com.htr.util.MarkdownUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +32,20 @@ public class BlogServiceImpl implements BlogService{
     }
 
     @Override
+    public Blog getAndConvert(Long id) {
+        Blog blog = blogDao.getBlog(id);
+        if (blog == null){
+            throw new NotFoundException("Blog does not exist");
+        }
+        Blog b = new Blog();
+        BeanUtils.copyProperties(blog, b);
+        String content = b.getContent();
+        content = MarkdownUtils.markdownToHtmlExtensions(content);
+        b.setContent(content);
+        return b;
+    }
+
+    @Override
     public List<Blog> listBlog(Blog blog) {
         return blogDao.listBlog(blog);
     }
@@ -40,7 +57,6 @@ public class BlogServiceImpl implements BlogService{
             blog.setCreateTime(new Date());
             blog.setUpdateTime(new Date());
             blog.setViews(0);
-            return blogDao.saveBlog(blog);
         }else {
             blog.setUpdateTime(new Date());
         }

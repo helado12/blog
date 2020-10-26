@@ -12,6 +12,9 @@ import java.util.List;
 public interface BlogService {
     Blog getBlog(long id);
 
+    //convert markdown in blog content to html
+    Blog getAndConvert(Long id);
+
     List<Blog> listBlog(Blog blog);
 
     int saveBlog(Blog blog);
