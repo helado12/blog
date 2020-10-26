@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -49,4 +50,23 @@ public class IndexController {
         model.addAttribute("recommendBlogs", recommendBlog);
         return "index";
     }
+
+    @PostMapping("/search")
+    public String search(@RequestParam(required = false, defaultValue = "1", value = "pagenum") int pagenum,
+                         @RequestParam String query, Model model){
+        PageHelper.startPage(pagenum,8);
+        List<Blog> allBlogSearch = blogService.getBlogSearch(query);
+
+        PageInfo pageInfo = new PageInfo(allBlogSearch);
+        model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("query", query);
+        return "search";
+    }
+
+    @GetMapping("/blog/{id}")
+    public String blog(@PathVariable Long id, Model model){
+        model.addAttribute("blog", blogService.getBlog(id));
+        return "blog";
+    }
+
 }

@@ -74,7 +74,6 @@
     </select>
 
     <select id="listAllBlog" parameterType="Blog" resultMap="ResultBlog">
-        <bind name="pattern" value="'%' + #{title} + '%'"/>
         select b.id,  b.title, b.update_time, b.recommend, b.published,
         b.type_id, t.id typeid, t.name typename from t_blog b, t_type t
         where   b.type_id = t.id    /*博客类型id=类型id*/
@@ -113,6 +112,23 @@
            u.nickname, u.avatar
     from t_blog b, t_type t, t_user u
     where b.type_id = t.id and  u.id = b.user_id order by b.update_time desc
+    </select>
+
+    <select id="getBlogSearch" resultMap="ResultBlog">
+        <bind name="pattern" value="'%' + query + '%'"/>
+        select b.id, b.title, b.first_picture, b.views, b.update_time, b.description,
+               t.name typename, t.id typeid,
+               u.nickname, u.avatar
+        from t_blog b, t_type t, t_user u
+        <where>
+            <if test="1 == 1">
+                b.type_id = t.id and  u.id = b.user_id
+            </if>
+            <if test="query != ''">
+                and (b.title like #{pattern} or b.description like #{pattern} or b.content like #{pattern})
+            </if>
+        </where>
+        order by b.update_time desc
     </select>
 
     <select id="getAllRecommendBlog" resultMap="ResultBlog">

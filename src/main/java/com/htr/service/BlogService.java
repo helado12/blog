@@ -25,5 +25,7 @@ public interface BlogService {
 
     List<Blog> getIndexBlog();
 
+    List<Blog> getBlogSearch(String query);
+
     List<Blog> getAllRecommendBlog();
 }
