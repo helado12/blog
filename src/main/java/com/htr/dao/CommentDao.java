@@ -16,7 +16,7 @@ public interface CommentDao {
 
     List<Comment> findByBlogIdAndParentCommentNull(long id);
 
-    Comment searchComment(Long parentCommentId);
+    List<Comment> getReplyComment(Long parentCommentId);
 
     int saveComment(Comment comment);
 }

@@ -13,6 +13,10 @@
         <result property="createTime" column="create_time"/>
         <result property="blogId" column="blog_id"/>
         <result property="parentCommentId" column="parent_comment_id"/>
+        <association property="parentComment" javaType="com.htr.pojo.Comment">
+            <id property="id" column="parentId"/>
+            <result property="nickname" column="parentNickname"/>
+        </association>
         <association property="blog" javaType="blog">
             <id property="id" column="id"/>
         </association>
@@ -22,15 +26,15 @@
         select c.id cid,c.nickname,c.email,c.content,c.avatar,
                c.create_time,c.blog_id,c.parent_comment_id
         from t_comment c, t_blog b
-        where c.blog_id = b.id and c.blog_id = #{blogId}
+        where c.blog_id = b.id and c.blog_id = #{blogId} and c.parent_comment_id = -1
         order by c.create_time desc
     </select>
 
-    <select id="searchComment" resultMap="resultComment">
+    <select id="getReplyComment" resultMap="resultComment">
         select c.id cid, c.nickname, c.email, c.content, c.avatar,
-               c.create_time, c.blog_id, c.parent_comment_id
-        from t_comment c
-        where c.parent_comment_id = #{parentCommentId}
+               c.create_time, c.blog_id, c.parent_comment_id, p.id parentId, p.nickname parentNickname
+        from t_comment c, t_comment p
+        where c.parent_comment_id = #{parentCommentId} and p.id = c.parent_comment_id
     </select>
 
     <insert id="saveComment" parameterType="com.htr.pojo.Comment">
