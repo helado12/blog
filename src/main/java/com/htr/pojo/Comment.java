@@ -21,6 +21,11 @@ public class Comment {
     private String email;
     private String content;
     private String avatar;
+    private boolean adminComment;  //是否为管理员评论
+
+    private Long blogId;
+    private Long parentCommentId;
+    private String parentNickname;
 
     private Date createTime;
 
