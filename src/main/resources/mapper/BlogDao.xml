@@ -90,7 +90,7 @@
     </insert>
 
     <insert id="saveBlogTag" parameterType="BlogAndTag">
-        insert into t_blog_tags value(#{tagId}, #{blogId});
+        insert into t_blog_tags (tag_id, blog_id) value(#{tagId}, #{blogId});
     </insert>
 
     <update id="updateBlog" parameterType="Blog">
@@ -101,6 +101,10 @@
                           commentabled = #{commentabled} ,update_time = #{updateTime}, description = #{description}
                           where id = #{id};
     </update>
+
+    <delete id="deleteTagByBlog">
+        delete from t_blog_tags where blog_id = #{id}
+    </delete>
 
     <delete id="deleteBlog">
         delete from t_blog where id = #{id}
@@ -135,6 +139,23 @@
         select id, title, recommend from t_blog where recommend = true
         order by update_time desc;
     </select>
-    
+
+    <select id="getByTypeId" resultMap="ResultBlog">
+        select b.id, b.title, b.first_picture, b.views, b.update_time, b.description,
+               t.name typename, t.id typeid,
+               u.nickname, u.avatar
+        from t_blog b, t_type t, t_user u
+        where (b.type_id = #{id} and t.id = b.type_id and u.id = b.user_id) order by b.update_time desc
+    </select>
+
+    <select id="getByTagId" resultMap="ResultBlog">
+        select b.id, b.title
+        from t_blog b, t_tag tag, t_blog_tags blogtag
+        where (blogtag.tag_id= tag.id and blogtag.blog_id = b.id and tag.id = #{id} ) order by b.update_time desc
+    </select>
+
+    <update id="updateViews">
+        update t_blog set views = views + 1 where id = #{id}
+    </update>
     
 </mapper>

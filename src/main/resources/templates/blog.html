@@ -258,7 +258,7 @@
             <div class="field m-mobile-wide m-margin-bottom-small">
               <div class="ui left icon input">
                 <i class="user icon"></i>
-                <input type="text" name="nickname" placeholder="Name" th:value="${session.nickname}!=null ? ${session.nickname}">
+                <input type="text" name="nickname" placeholder="Name" th:value="${session.user}!=null ? ${session.user.nickname}">
               </div>
             </div>
             <div class="field m-mobile-wide m-margin-bottom-small">

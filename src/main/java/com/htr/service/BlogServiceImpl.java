@@ -32,7 +32,9 @@ public class BlogServiceImpl implements BlogService{
     }
 
     @Override
+    @Transactional
     public Blog getAndConvert(Long id) {
+        blogDao.updateViews(id);
         Blog blog = blogDao.getBlog(id);
         if (blog == null){
             throw new NotFoundException("Blog does not exist");
@@ -61,7 +63,7 @@ public class BlogServiceImpl implements BlogService{
             blog.setUpdateTime(new Date());
         }
         for(Tag tag: tagService.listTag(blog.getTagIds())){
-            blogDao.saveBlogTag(new BlogAndTag(blog.getId(),tag.getId()));
+            blogDao.saveBlogTag(new BlogAndTag(tag.getId(), blog.getId()));
         }
         return blogDao.saveBlog(blog);
     }
@@ -69,6 +71,10 @@ public class BlogServiceImpl implements BlogService{
     @Transactional
     @Override
     public int updateBlog(Blog blog) {
+        blogDao.deleteTagByBlog(blog.getId());
+        for(Tag tag: tagService.listTag(blog.getTagIds())){
+                blogDao.saveBlogTag(new BlogAndTag(tag.getId(), blog.getId()));
+        }
         blog.setUpdateTime(new Date());
         return blogDao.updateBlog(blog);
     }
@@ -97,6 +103,16 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public List<Blog> getAllRecommendBlog() {
         return blogDao.getAllRecommendBlog();
+    }
+
+    @Override
+    public List<Blog> getByTypeId(Long id) {
+        return blogDao.getByTypeId(id);
+    }
+
+    @Override
+    public List<Blog> getByTagId(Long id) {
+        return blogDao.getByTagId(id);
     }
 
 }

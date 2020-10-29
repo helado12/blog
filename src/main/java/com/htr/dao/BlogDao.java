@@ -21,6 +21,8 @@ public interface BlogDao {
 
     int updateBlog(Blog blog);
 
+    int deleteTagByBlog(Long id);
+
     void deleteBlog(Long id);
 
     List<Blog> listBlog(Blog blog);
@@ -34,4 +36,10 @@ public interface BlogDao {
     List<Blog> getAllRecommendBlog();
 
     List<Blog> getBlogSearch(String query);
+
+    int updateViews(Long id);
+
+    List<Blog> getByTypeId(Long id);
+
+    List<Blog> getByTagId(Long id);
 }

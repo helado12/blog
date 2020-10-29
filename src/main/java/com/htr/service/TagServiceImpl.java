@@ -44,7 +44,7 @@ public class TagServiceImpl implements TagService{
     public List<Tag> listTag(String ids) {
         ArrayList<Long> list1 = new ArrayList<>();
         if (ids != "" && ids != null){
-            String[] idsList = ids.split(" ");
+            String[] idsList = ids.split(",");
             for (String id: idsList){
                 list1.add(Long.parseLong(id));
             }
