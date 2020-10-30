@@ -4,6 +4,7 @@ import com.htr.pojo.Blog;
 import com.htr.pojo.BlogAndTag;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: T. He
@@ -35,4 +36,7 @@ public interface BlogService {
     List<Blog> getByTypeId(Long id);
 
     List<Blog> getByTagId(Long id);
+
+    Map<String, List<Blog>> archiveBlog();
+
 }

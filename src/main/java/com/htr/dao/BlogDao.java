@@ -42,4 +42,8 @@ public interface BlogDao {
     List<Blog> getByTypeId(Long id);
 
     List<Blog> getByTagId(Long id);
+
+    List<String> queryBlogYear();
+
+    List<Blog> findByYear(String year);
 }

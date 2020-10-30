@@ -11,8 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Author: T. He
@@ -113,6 +112,29 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public List<Blog> getByTagId(Long id) {
         return blogDao.getByTagId(id);
+    }
+
+    @Override
+    public Map<String, List<Blog>> archiveBlog() {
+        Set<String> set = new HashSet<>(blogDao.queryBlogYear());
+        List<String> blogYears = new ArrayList<>(set);
+        Collections.sort(blogYears, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return - o1.compareTo(o2);
+            }
+        });
+        Map<String, List<Blog>> map = new TreeMap<>(new Comparator<String>() {
+            public int compare(String obj1, String obj2) {
+                // 降序排序
+                return obj2.compareTo(obj1);}
+        });
+
+        for (String year: blogYears){
+            map.put(year, blogDao.findByYear(year));
+        }
+
+        return map;
     }
 
 }
