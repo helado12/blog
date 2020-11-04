@@ -3,7 +3,7 @@ spring:
     cache: false
 
   profiles:
-    active: dev
+    active: pro
 
 
 mybatis:
@@ -13,5 +13,7 @@ mybatis:
   type-aliases-package: com.htr.pojo
 
 comment.avatar: /images/avatar.png
+
+
 
 

@@ -33,8 +33,13 @@ public class BlogServiceImpl implements BlogService{
     @Override
     @Transactional
     public Blog getAndConvert(Long id) {
-        blogDao.updateViews(id);
         Blog blog = blogDao.getBlog(id);
+        if (blog.getViews() == null) {
+
+        }
+        blogDao.updateViews(id);
+        blog = blogDao.getBlog(id);
+        if (blog.getViews() == null) blogDao.saveBlog(blog);
         if (blog == null){
             throw new NotFoundException("Blog does not exist");
         }

@@ -22,56 +22,61 @@
       s.parentNode.insertBefore(hm, s);
     })();
   </script>
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <style type="text/css">
+    .pace {
+      -webkit-pointer-events: none;
+      pointer-events: none;
+
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    .pace-inactive {
+      display: none;
+    }
+
+    .pace .pace-progress {
+      background: antiquewhite;
+      position: fixed;
+      z-index: 2000;
+      top: 0;
+      right: 100%;
+      width: 100%;
+      height: 5px;
+    }
+  </style>
+
+
+
 </head>
 <body>
 
 
 <!--导航-->
-<nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
+<nav th:fragment="menu(n)" class="ui inverted m-opacity-nav attached segment m-padded-tb-mini m-shadow-small" >
   <div class="ui container">
     <div class="ui inverted secondary stackable menu">
-      <h2 class="ui teal header item" title="个人博客">trh_Blog</h2>
-      <a href="#" target="_blank" th:href="@{/}" class="m-item item m-mobile-hide " th:classappend="${n==1} ? 'active'"><i class="mini home icon"></i>&nbsp;首页</a>
-      <a href="#" target="_blank" th:href="@{/types/-1}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="mini idea icon"></i>分类</a>
-      <a href="#" target="_blank" th:href="@{/tags/-1}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="mini tags icon"></i>&nbsp;标签</a>
-      <a href="#" target="_blank" th:href="@{/archives}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="mini clone icon"></i>&nbsp;归档</a>
-      <a href="#" target="_blank" th:href="@{/Messages}" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="mini envelope outline icon"></i>&nbsp;留言</a>
-      <a href="#" target="_blank" th:href="@{/about}" class="m-item item m-mobile-hide" th:classappend="${n==6} ? 'active'"><i class="mini info icon"></i>关于我</a>
-      <a href="http://music.xiongsihao.com" class="m-item item m-mobile-hide" th:classappend="${n==7} ? 'active'"><i class="mini music icon"></i>&nbsp;在线音乐</a>
-      <a href="http://netdisk.xiongsihao.com" class="m-item item m-mobile-hide" th:classappend="${n==8} ? 'active'"><i class="mini save icon"></i>&nbsp;云盘</a>
-<!--      <a href="#" target="_blank" th:href="@{/admin}" class="m-item item m-mobile-hide" th:classappend="${n==7} ? 'active'"><i class="mini user secret icon"></i>后台管理</a>
-      <a href="#" target="_blank" th:href="@{/qq/oauth}" class="m-item item m-mobile-hide"><i class="mini qq icon"></i>QQ登录</a>-->
-
-      <div class="right m-item item m-mobile-hide ">
-        <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
+      <h2 class="ui teal header item" title="个人博客">TRH_Blog</h2>
+      <a href="#" target="" th:href="@{/}" class="m-item item m-mobile-hide " th:classappend="${n==1} ? 'active'"><i class=" home icon"></i>HOME</a>
+      <a href="#" target="" th:href="@{/types/-1}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class=" idea icon"></i>CATEGORIES</a>
+      <a href="#" target="" th:href="@{/tags/-1}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class=" tags icon"></i>TAGS</a>
+      <a href="#" target="" th:href="@{/archives}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class=" clone icon"></i>TIMELINE</a>
+      <a href="#" target="" th:href="@{/about}" class="m-item item m-mobile-hide" th:classappend="${n==6} ? 'active'"><i class=" info icon"></i>ABOUT ME</a>
+      <div class="right m-item item m-mobile-hide" >
+        <form name="search" action="#" th:action="@{/search}" method="post" target="">
           <div class="ui icon inverted  input m-margin-tb-tiny">
             <input type="text" name="query" placeholder="Search...." th:value="${query}">
             <i onclick="document.forms['search'].submit()" class="search link icon"></i>
           </div>
         </form>
       </div>
-
       <div class="right m-item m-mobile-hide item" >
         <div th:classappend="${session.loginStatus}?'myHideStyle':'myShowStyle'">
-          <a href="#"  th:href="@{/qq/oauth}" style="width:80px; text-align:center"><i class="mini qq icon"></i>QQ登录&nbsp;|</a>
-          <a href="#"  th:href="@{/github/oauth}" style="width:80px; text-align:center"><i class="github icon"></i>github登录&nbsp;|</a>
-          <a href="#" target="_blank" th:href="@{/admin}" style="width:80px; text-align:center"><i class="mini user secret icon"></i>&nbsp;后台管理</a>
-        </div>
-
-        <div class="ui dropdown item" th:classappend="${session.loginStatus}?'myShowStyle':'myHideStyle'">
-          <div class="text">
-            <img class="ui avatar image" th:src="${session.avatar}">
-            <span th:text="${session.nickname}">Xiong_sh</span>
-          </div>
-          <i class="dropdown icon"></i>
-          <div class="menu" th:if="${session.loginType == 1}">
-            <a href="#" th:href="@{/qqinfo}" class="item">QQ资料</a>
-            <a href="#" th:href="@{/qqlogout}" class="item">退出登录</a>
-          </div>
-          <div class="menu" th:if="${session.loginType == 2}">
-            <a href="#" th:href="@{/githubInfo}" class="item">Github资料</a>
-            <a href="#" th:href="@{/githublogout}" class="item">退出登录</a>
-          </div>
+          <a href="#"  th:href="@{/Twitter/oauth}" style="width:30px; text-align:center; color: whitesmoke !important;"><i class="basic twitter icon"></i>Twitter&nbsp;|</a>
+          <a href="#"  th:href="@{/Github/oauth}" style="width:30px; text-align:center; color: whitesmoke !important;"><i class="github icon"></i>Github&nbsp;|&nbsp;</a>
+          <a href="#" target="" th:href="@{/admin}" style="width:30px; text-align:center; color: whitesmoke !important;"><i class=" user secret icon"></i>Admin</a>
         </div>
       </div>
 
@@ -110,43 +115,39 @@
           </div>
         </div>
       </div>
-      <div class="three wide column" >
-        <h4 class="ui inverted header m-text-thin m-text-spaced " >最新博客</h4>
-        <div id="newblog-container">
-          <div class="ui inverted link list" th:fragment="newblogList">
-            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item m-text-thin" th:each="blog : ${newblogs}" th:text="${blog.title}">用户故事（User Story）</a>
-            <!--/*-->
-            <a href="#" class="item m-text-thin">用户故事（User Story）</a>
-            <a href="#" class="item m-text-thin">用户故事（User Story）</a>
-            <!--*/-->
-          </div>
-        </div>
-      </div>
+<!--      <div class="three wide column" >-->
+<!--        <h4 class="ui inverted header m-text-thin m-text-spaced " >Newest</h4>-->
+<!--        <div id="newblog-container">-->
+<!--          <div class="ui inverted link list" th:fragment="newblogList">-->
+<!--            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="" class="item m-text-thin" th:each="blog : ${newblogs}" th:text="${blog.title}">用户故事（User Story）</a>-->
+<!--            &lt;!&ndash;/*&ndash;&gt;-->
+<!--            <a href="#" class="item m-text-thin">用户故事（User Story）</a>-->
+<!--            <a href="#" class="item m-text-thin">用户故事（User Story）</a>-->
+<!--            &lt;!&ndash;*/&ndash;&gt;-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="three wide column">
-        <h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
+        <h4 class="ui inverted header m-text-thin m-text-spaced ">Contact Me</h4>
         <div class="ui inverted link list">
-          <a href="#" class="item m-text-thin" th:text="#{index.email}">Email：xsh2668028614@qq.com</a>
+          <a href="#" class="item m-text-thin" th:text="#{index.email}">Email：</a>
           <a href="#" class="item m-text-thin" th:text="#{index.qq}">QQ：2668028614</a>
         </div>
       </div>
       <div class="seven wide column">
         <h4 class="ui inverted header m-text-thin m-text-spaced ">Blog</h4>
-        <p class="m-text-thin m-text-spaced m-opacity-mini" th:text="#{index.blogDescription}">这是我的个人博客、记录学习进度和关于编程、写作、思考相关的任何内容...</p>
+        <p class="m-text-thin m-text-spaced m-opacity-mini" >
+          This is my personal blog, recording learning progress and any content related to programming, writing, thinking...</p>
       </div>
     </div>
     <div class="ui inverted section divider"></div>
-    <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2019 - <span th:text="${#dates.year(#dates.createNow())}">2019</span> &nbsp;XSH &nbsp; Designed by Xiong_sh</p>
-    <p class="m-text-thin m-text-spaced m-opacity-tiny"><a href="http://icp.chinaz.com/info?q=xiongsihao.com">赣ICP备20000310号</a></p>
-
-    <div style="width:300px;margin:0 auto; padding:1px 0; ">
-      <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=36098102000147" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="../images/1.png" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#ff1c04;">赣公网安备 36098102000147号</p></a>
-    </div>
+    <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2020 - <span th:text="${#dates.year(#dates.createNow())}">2019</span> &nbsp;TRH &nbsp; Designed by TRH</p>
 
     <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
     <script>
       var now = new Date();
       function createtime() {
-        var grt= new Date("11/11/2019 17:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        var grt= new Date("11/01/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
         now.setTime(now.getTime()+250);
         days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
         hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
@@ -154,8 +155,8 @@
         mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
         seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
         snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
-        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
-        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        document.getElementById("timeDate").innerHTML = "Site Running: "+dnum+" Days ";
+        document.getElementById("times").innerHTML = hnum + ":" + mnum + ":" + snum + "";
       }
       setInterval("createtime()",500);
     </script>
@@ -166,7 +167,6 @@
 
 <th:block th:fragment="script">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-  <div class="aplayer" data-id="3778678" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"  data-volume="0.6" ></div>
   <script src="http://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
   <script src="http://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
@@ -178,6 +178,7 @@
   <script src="../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
   <script src="../static/js/jquery.emoji.js" th:src="@{/js/jquery.emoji.js}"></script>
   <script src="../static/js/emoji.list.js" th:src="@{/js/emoji.list.js}"></script>
+  <script src="https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@3.0.8/js/maodian.js"></script>
   <script>
     $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
   </script>
@@ -216,10 +217,10 @@
       };*/
     }else if(!browser.versions.mobile){ //非移动端，动态加载js和div
       //设置电脑端显示网易云音乐插件
-      onload = function () {
-        /*var MusicDivShow = document.getElementById('netEasy-music');//获取指定div中的元素
-        MusicDivShow.style.display = 'block';//控制层显示*/
-      };
+      // onload = function () {
+      //   /*var MusicDivShow = document.getElementById('netEasy-music');//获取指定div中的元素
+      //   MusicDivShow.style.display = 'block';//控制层显示*/
+      // };
       var script1 = document.createElement('script');
       script1.type = 'text/javascript';
       script1.src = '\\js\\snow.js';
@@ -247,9 +248,9 @@
       script5.type = 'text/javascript';
       script5.src = '\\js\\autoload.js';
 
-      $('body').append(script5);
-      $('body').append(script1);
-      $('body').append(script4);
+      // $('body').append(script5);
+      // $('body').append(script1);
+      // $('body').append(script4);
       // $('body').append(script2);
       $('body').append(script3);
     }

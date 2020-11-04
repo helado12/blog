@@ -10,29 +10,7 @@
 <body>
 
   <!--导航-->
-  <nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
-    <div class="ui container">
-<!--      stackable，自动堆叠，用于移动端-->
-      <div class="ui inverted secondary stackable menu">
-        <h2 class="ui teal header item">Blog</h2>
-<!--        m-mobile-hide，自定义手机屏幕端隐藏样式-->
-        <a href="#" class="item m-mobile-hide"><i class="home icon"></i> Home</a>
-        <a href="#" class="item m-mobile-hide"><i class="idea icon"></i>Category</a>
-        <a href="#" class="item m-mobile-hide"><i class="tags icon"></i>Tag</a>
-        <a href="#" class="item m-mobile-hide"><i class="clone icon"></i>Archive</a>
-        <a href="#" class="item m-mobile-hide"><i class="info icon"></i>About me</a>
-<!--        右边搜索框-->
-        <div class="right m-item item m-mobile-hide">
-          <div class="ui icon inverted transparent input m-margin-tb-tiny">
-            <input type="text" placeholder="Search....">
-            <i class="search link icon"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
-      <i class="sidebar icon"></i>
-    </a>
+  <nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment  m-padded-tb-mini m-shadow-small" >
   </nav>
   <!--中间内容-->
   <div  class="m-container m-padded-tb-big animated fadeIn">
@@ -44,10 +22,10 @@
           <div class="ui top attached segment">
             <div class="ui middle aligned two column grid">
               <div class="column">
-                <h3 class="ui teal header">blog</h3>
+                <h3 class="ui teal header">BLOGS</h3>
               </div>
               <div class="right aligned column">
-                Total: <h2 class="ui orange header m-inline-block m-text-thin" th:text="${pageInfo.total}"> 14 </h2>
+                Total: <h2 class="ui teal header m-inline-block m-text-thin" th:text="${pageInfo.total}"> 14 </h2>
               </div>
             </div>
           </div>
@@ -252,8 +230,8 @@
 
           <!--二维码-->
           <h4 class="ui horizontal divider header m-margin-top-large">Scan me</h4>
-          <div class="ui centered card" style="width: 11em">
-            <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" alt="" class="ui rounded image" >
+          <div class="ui centered card" style="width: 13em">
+            <img src="../static/images/github.png" th:src="@{/images/github.png}" alt="" class="ui rounded image" >
           </div>
         </div>
 

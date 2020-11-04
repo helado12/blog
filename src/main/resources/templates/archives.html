@@ -44,7 +44,7 @@
             <h3 class="ui teal header">Archive</h3>
           </div>
           <div class="right aligned column">
-            Total <h2 class="ui orange header m-inline-block m-text-thin" th:text="${blogCount}"> 114 </h2> 篇博客
+            Total <h2 class="ui teal header m-inline-block m-text-thin" th:text="${blogCount}"> 114 </h2>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
             <span th:text="${blog.title}">关于刻意练习的清单</span>
             <div class="ui teal basic left pointing label m-padded-mini " th:text="${#dates.format(blog.updateTime,'MM月dd日')}">9月03日</div>
           </span>
-          <div class="ui orange basic left pointing label m-padded-mini " th:text="${blog.flag}">原创</div>
+          <div class="ui teal basic left pointing label m-padded-mini " th:text="${blog.flag}">原创</div>
         </a>
       </div>
       </th:block>

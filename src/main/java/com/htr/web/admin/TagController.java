@@ -26,7 +26,7 @@ public class TagController {
     @GetMapping("/tags")
     public String tags(Model model){
         model.addAttribute("tags", tagService.listTag());
-        return "/admin/tags";
+        return "admin/tags";
     }
 
     @GetMapping("/tags/input")

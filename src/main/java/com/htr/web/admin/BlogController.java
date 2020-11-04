@@ -37,7 +37,7 @@ public class BlogController {
     public String blogs(Model model, HttpSession session){
         model.addAttribute("blogs", blogService.listAllBlog());
         model.addAttribute("types", typeService.listType());
-        return "/admin/blogs";
+        return "admin/blogs";
     }
 
 
@@ -52,7 +52,7 @@ public class BlogController {
         model.addAttribute("blog", new Blog());
         model.addAttribute("tags", tagService.listTag());
         model.addAttribute("types", typeService.listType());
-        return "/admin/blogs-input";
+        return "admin/blogs-input";
     }
 
     public void setTypeAndTag(Model model){
@@ -66,7 +66,7 @@ public class BlogController {
         Blog blog = blogService.getBlog(id);
         if(blog != null) blog.init();
         model.addAttribute("blog", blog);
-        return  "/admin/blogs-input";
+        return  "admin/blogs-input";
     }
 
     @PostMapping("/blogs")

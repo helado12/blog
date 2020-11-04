@@ -22,7 +22,7 @@
         <result property="typeId" column="type_id"/>
         <result property="description" column="description"/>
         <association property="user" javaType="User">
-            <id property="id" column="uid"/>
+            <result property="id" column="uid"/>
             <result property="username" column="username"/>
             <result property="nickname" column="nickname"/>
             <result property="email" column="email"/>
@@ -41,7 +41,7 @@
     <select id="getBlog" resultMap="ResultBlog">
         select b.id, b.first_picture, b.flag, b.title, b.content, b.views, b.published,
                b.update_time,b.commentabled, b.shareStatement, b.appreciation, b.description,
-               u.nickname, u.avatar,
+               u.nickname nickname, u.avatar avatar, u.id uid,
                tag.id tagid, tag.name tagname, b.type_id typeid
         from t_blog b, t_user u, t_tag tag, t_blog_tags tb, t_type type
         where b.user_id = u.id and tb.blog_id = b.id and tb.tag_id = tag.id and b.id = #{id}
@@ -113,7 +113,7 @@
     <select id="getIndexBlog" resultMap="ResultBlog">  /*主页博客展示*/
     select b.id, b.title, b.first_picture, b.views, b.update_time, b.description,
            t.name typename, t.id typeid,
-           u.nickname, u.avatar
+           u.nickname nickname, u.avatar avatar, u.id uid
     from t_blog b, t_type t, t_user u
     where b.type_id = t.id and  u.id = b.user_id order by b.update_time desc
     </select>
@@ -122,7 +122,7 @@
         <bind name="pattern" value="'%' + query + '%'"/>
         select b.id, b.title, b.first_picture, b.views, b.update_time, b.description,
                t.name typename, t.id typeid,
-               u.nickname, u.avatar
+               u.nickname nickname, u.avatar avatar
         from t_blog b, t_type t, t_user u
         <where>
             <if test="1 == 1">
@@ -143,7 +143,7 @@
     <select id="getByTypeId" resultMap="ResultBlog">
         select b.id, b.title, b.first_picture, b.views, b.update_time, b.description,
                t.name typename, t.id typeid,
-               u.nickname, u.avatar
+               u.nickname, u.avatar avatar, u.id uid
         from t_blog b, t_type t, t_user u
         where (b.type_id = #{id} and t.id = b.type_id and u.id = b.user_id) order by b.update_time desc
     </select>
