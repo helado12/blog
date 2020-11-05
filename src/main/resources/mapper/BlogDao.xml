@@ -8,7 +8,7 @@
         <id property="id" column="id"/>
         <result property="title" column="title"/>
         <result property="content" column="content"/>
-        <result property="firstPicture" column="firstPicture"/>
+        <result property="firstPicture" column="first_picture"/>
         <result property="flag" column="flag"/>
         <result property="views" column="views"/>
         <result property="appreciation" column="appreciation"/>
@@ -40,7 +40,7 @@
 
     <select id="getBlog" resultMap="ResultBlog">
         select b.id, b.first_picture, b.flag, b.title, b.content, b.views, b.published,
-               b.update_time,b.commentabled, b.shareStatement, b.appreciation, b.description,
+               b.update_time,b.commentabled, b.shareStatement, b.appreciation, b.description, b.first_picture,
                u.nickname nickname, u.avatar avatar, u.id uid,
                tag.id tagid, tag.name tagname, b.type_id typeid
         from t_blog b, t_user u, t_tag tag, t_blog_tags tb, t_type type
@@ -49,7 +49,7 @@
 
     <select id="listBlog" parameterType="Blog" resultMap="ResultBlog">
         <bind name="pattern" value="'%' + title + '%'"/>
-        select b.id,  b.title, b.update_time, b.recommend, b.published,
+        select b.id,  b.title, b.update_time, b.recommend, b.published, b.first_picture,
                b.type_id, t.id typeid, t.name typename from t_blog b, t_type t
         <where>
             <if test="1 == 1">
@@ -74,12 +74,12 @@
     </select>
 
     <select id="listAllBlog" parameterType="Blog" resultMap="ResultBlog">
-        select b.id,  b.title, b.update_time, b.recommend, b.published,
+        select b.id,  b.title, b.update_time, b.recommend, b.published, b.first_picture,
         b.type_id, t.id typeid, t.name typename from t_blog b, t_type t
         where   b.type_id = t.id    /*博客类型id=类型id*/
     </select>
 
-    <insert id="saveBlog" parameterType="Blog">
+    <insert id="saveBlog" parameterType="Blog" keyProperty="id" useGeneratedKeys="true">
         insert into t_blog (id, title, content, first_picture, flag, views,
                             appreciation, shareStatement, commentabled, published,
                             recommend, create_time, update_time, user_id, type_id, tag_ids, description)
@@ -111,7 +111,7 @@
     </delete>
 
     <select id="getIndexBlog" resultMap="ResultBlog">  /*主页博客展示*/
-    select b.id, b.title, b.first_picture, b.views, b.update_time, b.description,
+    select b.id, b.title, b.first_picture, b.views, b.update_time, b.description, b.first_picture,
            t.name typename, t.id typeid,
            u.nickname nickname, u.avatar avatar, u.id uid
     from t_blog b, t_type t, t_user u
@@ -141,7 +141,7 @@
     </select>
 
     <select id="getByTypeId" resultMap="ResultBlog">
-        select b.id, b.title, b.first_picture, b.views, b.update_time, b.description,
+        select b.id, b.title, b.first_picture, b.views, b.update_time, b.description, b.first_picture,
                t.name typename, t.id typeid,
                u.nickname, u.avatar avatar, u.id uid
         from t_blog b, t_type t, t_user u

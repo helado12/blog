@@ -81,7 +81,7 @@ public class TagServiceImpl implements TagService{
             public int compare(Tag o1, Tag o2) {
                 Integer s1 = o1.getBlogs().size();
                 Integer s2 = o2.getBlogs().size();
-                return s1.compareTo(s2);
+                return -s1.compareTo(s2);
             }
         });
         return tags;

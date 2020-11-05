@@ -66,10 +66,11 @@ public class BlogServiceImpl implements BlogService{
         }else {
             blog.setUpdateTime(new Date());
         }
+        blogDao.saveBlog(blog);
         for(Tag tag: tagService.listTag(blog.getTagIds())){
             blogDao.saveBlogTag(new BlogAndTag(tag.getId(), blog.getId()));
         }
-        return blogDao.saveBlog(blog);
+        return 1;
     }
 
     @Transactional

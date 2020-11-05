@@ -59,12 +59,13 @@ public class TypeServiceImpl implements TypeService{
     @Override
     public List<Type> getBlogType() {
         List<Type> types = typeDao.getBlogType();
+
         Collections.sort(types, new Comparator<Type>() {
             @Override
             public int compare(Type o1, Type o2) {
                 Integer s1 = o1.getBlogs().size();
                 Integer s2 = o2.getBlogs().size();
-                return s1.compareTo(s2);
+                return -s1.compareTo(s2);
             }
         });
         return types;
