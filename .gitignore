@@ -15,7 +15,7 @@ target/
 
 .js
 .css
-.html
+*.html
 
 
 ### IntelliJ IDEA ###
