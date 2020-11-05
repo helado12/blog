@@ -1,5 +1,5 @@
 # Personal Blog System
-### A nice, simple blog using Spring Boot, mybatis and semantic-ui⭐️
+### A nice, simple blog using Spring Boot, mybatis and semantic-ui ⭐️
 
 Project link: http://34.105.241.17:8080/
 
