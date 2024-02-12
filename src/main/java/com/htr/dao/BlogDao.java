@@ -43,6 +43,8 @@ public interface BlogDao {
 
     List<Blog> getByTagId(Long id);
 
+    List<Blog> getBlogsByCategoryId(Long categoryId);
+
     List<String> queryBlogYear();
 
     List<Blog> findByYear(String year);
