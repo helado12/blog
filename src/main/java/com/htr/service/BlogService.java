@@ -37,6 +37,8 @@ public interface BlogService {
 
     List<Blog> getByTagId(Long id);
 
+    List<Blog> getBlogsByCategory(Long categoryId);
+
     Map<String, List<Blog>> archiveBlog();
 
 }
