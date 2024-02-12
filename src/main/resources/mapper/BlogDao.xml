@@ -154,6 +154,14 @@
         where (blogtag.tag_id= tag.id and blogtag.blog_id = b.id and tag.id = #{id} ) order by b.update_time desc
     </select>
 
+    <select id="getBlogsByCategoryId" parameterType="Long" resultMap="ResultBlog">
+        select b.*
+        from t_blog b
+        join t_category c on b.category_id = c.id
+        where c.id = #{id}
+        order by b.update_time desc
+    </select>
+
     <update id="updateViews">
         update t_blog set views = views + 1 where id = #{id}
     </update>
